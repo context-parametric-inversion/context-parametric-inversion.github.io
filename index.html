@@ -61,6 +61,7 @@
                   Kolter</a>&nbsp;&nbsp;&nbsp;
                 <a target="_blank" href="https://www.cs.cmu.edu/~aditirag/"
                   style="color:blanchedalmond !important;">Aditi Raghunathan</a>
+                <br />Carnegie Mellon University
               </span>
             </div>
             <div class="column has-text-centered">
@@ -128,19 +129,22 @@
                 <li>LLM's are instruction finetuned to improve their ability to follow the user instruction and input
                   context.
                 </li>
-                <li>State-of-the-art models still struggle to rely on the context, when it is not aligned
+                <li>However, state-of-the-art models still struggle to rely on the context, when it is not aligned
                   with parametric knowledge.</li>
-                <li>We observe an <i>intriguing</i> phenomenon: contrary to the expectation, context reliance infact
-                  decreases with instruction finetuning, despite an initial expected increase. </li>
-                <li> We call this as the Context-Parametric Inversion, and tie it to the properties of instruction
-                  finetuning
-                  data.</li>
+                <li>We observe an <i>intriguing</i> phenomenon: context reliance infact
+                  decreases with instruction finetuning, despite an initial expected increase. This decrease happens,
+                  while the performance on standard benchmarks keeps on increasing. Rather it starts quite early into
+                  the training.</li>
+                <li>This is quite surprising as instruction finetuning is infact supposed to improve context reliance.
+                  We call this as context-parametric inversion.
+                </li>
+
               </ol>
               </p>
               <hr color="gray" size="3">
-              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">What Causes Context-Parametric
-                Inversion</h2>
-              <br>
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Is there a Simple Explanation
+                for this?</h2>
+              <h3 class="subtitle is-3">Memorization, Lack of context datapoints</h3>
               <div class="row">
                 <div class="col" style="text-align: center">
                   <img src="./resources/alpaca_filter.png"
@@ -149,13 +153,15 @@
               </div>
               <p>
               <ol>
-                <li>This decrease in context reliance with finetuning, is not due to memorization of relevant facts with
-                  the progress of instruction finetuning.</li>
-                <li>
-                  Model learns to rely on parametric knowledge broadly well outside the exact facts seen during
-                  finetuning.
+                <li>Even if we remove any overlap between finetuning and eval data (alpaca vs alpaca capitals filtered),
+                  we still observe a drop in context reliance.</li>
                 </li>
-                <li>One posible reason is that there are not enough context based answering datapoints in instruction
+                <li>
+                  Thus this is not due to memorization of facts with finetuning. Model learns to rely on parametric
+                  knowledge broadly well outside the exact facts seen during finetuning.
+                </li>
+                <li>Another posible reason is that there are not enough context based answering datapoints in
+                  instruction
                   tuning
                   dataset.</li>
                 </li>
@@ -211,7 +217,8 @@
                   the augmented data. </li>
                 <li> For example, adding entity substituted QA counterfactual data improves performance on QA tasks
                   only and doesn't generalize to other kind of context-parametric conflicts.</li>
-                <li><b>QK Finetuning</b>Regularizing finetuning by updating only the "Query" and "Key" matrices improves
+                <li><b>QK Finetuning: </b>Regularizing finetuning by updating only the "Query" and "Key" matrices
+                  improves
                   context reliance on certain tasks.</li>
               </ol>
               </p>

@@ -144,7 +144,10 @@
               <hr color="gray" size="3">
               <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Is there a Simple Explanation
                 for this?</h2>
-              <h3 class="subtitle is-3">Memorization, Lack of context datapoints</h3>
+              <!-- center align the h3 -->
+              <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">Negating some simple
+                hypotheses
+              </h3>
               <div class="row">
                 <div class="col" style="text-align: center">
                   <img src="./resources/alpaca_filter.png"
@@ -153,19 +156,18 @@
               </div>
               <p>
               <ol>
-                <li>Even if we remove any overlap between finetuning and eval data (alpaca vs alpaca capitals filtered),
-                  we still observe a drop in context reliance.</li>
+                <li>Can this drop in context reliance with finetuning be attributed to memorization of facts?
+                  We observe that even when removing any overlap between finetuning and eval data,
+                  we observe a drop in context reliance.</li>
                 </li>
                 <li>
-                  Thus this is not due to memorization of facts with finetuning. Model learns to rely on parametric
+                  Model learns to rely on parametric
                   knowledge broadly well outside the exact facts seen during finetuning.
                 </li>
                 <li>Another posible reason is that there are not enough context based answering datapoints in
-                  instruction
-                  tuning
-                  dataset.</li>
+                  instruction finetuning dataset.</li>
                 </li>
-                <li>We show that even when finetuning only on a <b>context-only subset of Alpaca</b>, there is a drop in
+                <li>However, even when finetuning only on a <b>context-only subset of Alpaca</b>, there is a drop in
                   context
                   reliance.</li>
               </ol>
@@ -189,11 +191,15 @@
                 </li>
                 <li><b>Parametric Datapoints</b>: General fact recall datapoints.</li>
               </ol>
-              Both <b>empirically and theoretically</b>, we show that the drop in context reliance is due to the
-              presence of
-              these non-context critical datapoints. <i>In the early stages of training</i>, context-critical points
+
+              <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">What causes context-parametric
+                inversion?
+              </h3>
+              Both <b>empirically and theoretically</b>, we show that this drop in context reliance is due to the
+              presence of non-context critical datapoints. <i>In the early stages of training</i>, context-critical
+              points
               have a high loss, and drive the attention towards the context. <i>In the later stages</i>, the model
-              leverages its pretrained knowledge to further reduce the loss on these non-context-critical points,
+              leverages its pretrained knowledge to further reduce the loss on the <i>non-context-critical points</i>,
               shifting the attention away from the context.
               </p>
 

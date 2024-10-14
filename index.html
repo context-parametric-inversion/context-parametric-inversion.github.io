@@ -129,8 +129,8 @@
                 <li>LLM's are instruction finetuned to improve their ability to follow the user instruction and input
                   context.
                 </li>
-                <li>However, state-of-the-art models still struggle to rely on the context, when it is not aligned
-                  with parametric knowledge.</li>
+                <li>However, state-of-the-art models still struggle to rely on the context, especially when it is not
+                  aligned with parametric knowledge. Why does this happen even after instruction finetuning?</li>
                 <li>We observe an <i>intriguing</i> phenomenon: context reliance infact
                   decreases with instruction finetuning, despite an initial expected increase. This decrease happens,
                   while the performance on standard benchmarks keeps on increasing. Rather it starts quite early into
@@ -167,9 +167,8 @@
                 <li>Another hypotheses could be lack of enough context based answering datapoints in
                   instruction finetuning dataset.</li>
                 </li>
-                <li>However, even when finetuning only on a <b>context-only subset of Alpaca</b>, there is a drop in
-                  context
-                  reliance.</li>
+                <li>However, even when finetuning on a <b>context-only subset of Alpaca</b>, there is a drop in
+                  context reliance (red-curve).</li>
               </ol>
               </p>
 

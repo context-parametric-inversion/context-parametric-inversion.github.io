@@ -136,7 +136,7 @@
                   while the performance on standard benchmarks keeps on increasing. Rather it starts quite early into
                   the training.</li>
                 <li>This is quite surprising as instruction finetuning is infact supposed to improve context reliance.
-                  We call this as context-parametric inversion.
+                  We call this as <b>context-parametric inversion</b>.
                 </li>
 
               </ol>
@@ -175,7 +175,7 @@
               <hr color="gray" size="3">
 
               <br>
-              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">A look at the Instruction
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">A closer look at the Instruction
                 Finetuning Datasets</h2>
               <div class="row">
                 <div class="col" style="text-align: center">
@@ -218,13 +218,13 @@
                 Our theoretical analysis naturally leads us to some potential mitigation strategies beyond filtering
                 non-context critical datapoints. These strategies give some limited but insightful results.
               <ol>
-                <li>Counterfactual data augmentation improves context reliance <i>only</i> on tasks similar in type to
-                  the augmented data. </li>
+                <li>Counterfactual data augmentation, a widely used approach, improves context reliance <i>only</i> on
+                  tasks similar in type to the augmented data. </li>
                 <li> For example, adding entity substituted QA counterfactual data improves performance on QA tasks
                   only and doesn't generalize to other kind of context-parametric conflicts.</li>
-                <li><b>QK Finetuning: </b>Regularizing finetuning by updating only the "Query" and "Key" matrices
-                  improves
-                  context reliance on certain tasks.</li>
+                <li><b>QK Finetuning: </b> Regularizing by updating only the "Query" and "Key"
+                  matrices enhances context reliance on certain tasks but may hurt performance on standard benchmarks,
+                  as value matrices can learn additional facts during finetuning.</li>
               </ol>
               </p>
 
@@ -246,7 +246,7 @@
   <footer class="footer" style="background-color: #B22234;">
     <div class="content has-text-centered">
       <p style="color: white;">
-        <bold>CMU</bold> &copy; 2023. All rights reserved.
+        <bold>CMU</bold> &copy; 2024. All rights reserved.
       </p>
     </div>
   </footer>

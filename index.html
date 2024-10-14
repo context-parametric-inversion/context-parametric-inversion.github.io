@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <link rel="icon" href="./resources/mars.png" type="image/png">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BM130PWZB5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-BM130PWZB5');
+  </script>
+  <meta charset="utf-8">
+  <meta name="description" content="Context Parametric Inversion">
+  <meta name="keywords" content="Instruction Finetuning, knowledge Conflicts">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Content-Parametric Inversion with Instruction Finetuning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link rel="icon" href="./favicon.ico?">
+
+</head>
+
+<body>
+
+  <section class="hero" style="background-color: #B22234;">
+    <div class="hero-body no-bottom-padding">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title" style="color: white;">
+              Context-Parametric Inversion: Why Instruction Finetuning May Not Actually Improve Context Reliance
+            </h1>
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block" style="color: white;">
+                <a target="_blank" href="https://saching007.github.io/" style="color:blanchedalmond !important;">Sachin
+                  Goyal</a><sup>*</sup>&nbsp;&nbsp;&nbsp;
+                <a target="_blank" href="https://kebaek.github.io/" style="color:blanchedalmond !important;">Christina
+                  Baek</a><sup>*</sup>&nbsp;&nbsp;&nbsp;
+                <a target="_blank" href="https://zicokolter.com/" style="color:blanchedalmond !important;">Zico
+                  Kolter</a>&nbsp;&nbsp;&nbsp;
+                <a target="_blank" href="https://www.cs.cmu.edu/~aditirag/"
+                  style="color:blanchedalmond !important;">Aditi Raghunathan</a>
+              </span>
+            </div>
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- arXiV Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="https://arxiv.org/abs/2307.03132"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- GitHub Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="https://github.com/locuslab/t-mars"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>GitHub</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a target="_blank" href="https://twitter.com/goyalsachin007/status/1677314439236681730?s=20"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                    </span>
+                    <span>Summary</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <!-- <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">TLDR</h2> -->
+
+          <tr>
+            <td>
+              <!-- <hr color="gray" size="3"> -->
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">TLDR</h2>
+              <div class="row">
+                <div class="col" style="text-align: center">
+                  <!-- add center align the image -->
+                  <img src="./resources/cpi.png" width="50%" style="border-radius:10px;"></img>
+                </div>
+              </div>
+              <p>
+              <ol>
+                <li>LLM's are instruction finetuned to improve their ability to follow the user instruction and input
+                  context.
+                </li>
+                <li>State-of-the-art models still struggle to rely on the context, when it is not aligned
+                  with parametric knowledge.</li>
+                <li>We observe an <i>intriguing</i> phenomenon: contrary to the expectation, context reliance infact
+                  decreases with instruction finetuning, despite an initial expected increase. </li>
+                <li> We call this as the Context-Parametric Inversion, and tie it to the properties of instruction
+                  finetuning
+                  data.</li>
+              </ol>
+              </p>
+              <hr color="gray" size="3">
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">What Causes Context-Parametric
+                Inversion</h2>
+              <br>
+              <div class="row">
+                <div class="col" style="text-align: center">
+                  <img src="./resources/alpaca_filter.png"
+                    style="border: 0px solid #bbb; border-radius: 10px; width: 100%;"></img></a>
+                </div>
+              </div>
+              <p>
+              <ol>
+                <li>This decrease in context reliance with finetuning, is not due to memorization of relevant facts with
+                  the progress of instruction finetuning.</li>
+                <li>
+                  Model learns to rely on parametric knowledge broadly well outside the exact facts seen during
+                  finetuning.
+                </li>
+                <li>One posible reason is that there are not enough context based answering datapoints in instruction
+                  tuning
+                  dataset.</li>
+                </li>
+                <li>We show that even when finetuning only on a <b>context-only subset of Alpaca</b>, there is a drop in
+                  context
+                  reliance.</li>
+              </ol>
+              </p>
+
+              <hr color="gray" size="3">
+
+              <br>
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">A look at the Instruction
+                Finetuning Datasets</h2>
+              <div class="row">
+                <div class="col" style="text-align: center">
+                  <!-- add center align the image -->
+                  <img src="./resources/data_categories.png" width="70%" style="border-radius:10px;"></img>
+                </div>
+              </div>
+              <p>
+              <ol>
+                <li><b>Context-Critical Datapoints</b>: Provide key information needed to answer user query.</li>
+                <li><b>Non-Context Critical Datapoints</b>: Context overlaps with model's knowledge from pretraining.
+                </li>
+                <li><b>Parametric Datapoints</b>: General fact recall datapoints.</li>
+              </ol>
+              Both <b>empirically and theoretically</b>, we show that the drop in context reliance is due to the
+              presence of
+              these non-context critical datapoints. <i>In the early stages of training</i>, context-critical points
+              have a high loss, and drive the attention towards the context. <i>In the later stages</i>, the model
+              leverages its pretrained knowledge to further reduce the loss on these non-context-critical points,
+              shifting the attention away from the context.
+              </p>
+
+
+              <hr color="gray" size="3">
+
+              <br>
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Can Counterfactual Data
+                Augmentation Fix Everything</h2>
+              <div class="row">
+                <div class="col" style="text-align: center">
+                  <!-- add center align the image -->
+                  <img src="./resources/mitigation.png" width="70%" style="border-radius:10px;"></img>
+                </div>
+              </div>
+              <p>
+                Our theoretical analysis naturally leads us to some potential mitigation strategies beyond filtering
+                non-context critical datapoints. These strategies give some limited but insightful results.
+              <ol>
+                <li>Counterfactual data augmentation improves context reliance <i>only</i> on tasks similar in type to
+                  the augmented data. </li>
+                <li> For example, adding entity substituted QA counterfactual data improves performance on QA tasks
+                  only and doesn't generalize to other kind of context-parametric conflicts.</li>
+                <li><b>QK Finetuning</b>Regularizing finetuning by updating only the "Query" and "Key" matrices improves
+                  context reliance on certain tasks.</li>
+              </ol>
+              </p>
+
+
+
+        </div>
+        </td>
+        </tr>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+
+  <br>
+  <br>
+  <!-- Insert a footer now in CMU red colour -->
+  <footer class="footer" style="background-color: #B22234;">
+    <div class="content has-text-centered">
+      <p style="color: white;">
+        <bold>CMU</bold> &copy; 2023. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

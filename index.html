@@ -68,7 +68,7 @@
               <div class="publication-links">
                 <!-- arXiV Link. -->
                 <span class="link-block">
-                  <a target="_blank" href="https://arxiv.org/"
+                  <a target="_blank" href="https://arxiv.org/abs/2410.10796"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -167,7 +167,7 @@
                 <li>Another hypotheses could be lack of enough context based answering datapoints in
                   instruction finetuning dataset.</li>
                 </li>
-                <li>However, even when finetuning on a <b>context-only subset of Alpaca</b>, there is a drop in
+                <li>However, even when finetuning on a <b>context-only subset of Alpaca</b> (~30%), there is a drop in
                   context reliance (red-curve).</li>
               </ol>
               </p>
@@ -185,7 +185,8 @@
               </div>
               <p>
               <ol>
-                <li><b>Context-Critical Datapoints</b>: Provide key information needed to answer user query.</li>
+                <li><b>Context-Critical Datapoints</b>: Context provides key information needed to answer the user
+                  query.</li>
                 <li><b>Non-Context Critical Datapoints</b>: Context overlaps with model's knowledge from pretraining.
                 </li>
                 <li><b>Parametric Datapoints</b>: General fact recall datapoints.</li>

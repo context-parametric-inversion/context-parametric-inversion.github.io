@@ -119,11 +119,9 @@
 
               <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">TLDR</h2>
               <p>
-                We highlight an intriguing failure mode of instruction finetuning (IFT) in LLMs, where contrary to the
-                expectation,
-                the model's tendency to answer based on the input context over it's parametric knowledge decreases with
-                IFT, despite an initial expected increase. This happens while the performance on standard benchmarks
-                keeps on increasing. We call this as <b>context-parametric inversion</b>.
+                We uncover a broad failure in Instruction Finetuning, where the model begins to rely more on the
+                parametric knowledge than the input context when they conflict, despite an initial jump in context
+                reliance. We call this as <b>context-parametric inversion</b>.
               </p>
               <hr color="gray" size="3">
 
@@ -141,13 +139,15 @@
                 But why do even the instruction tuned chatbots still fail to follow the input context, especially when
                 it
                 conflicts their pretraining knowledge? In principle, instruction finetuning (IFT) should improve model's
-                ability to follow the input context, but we observe a counterintuitive behavior instead.
+                ability to follow the input context over its parametric knowledge, but we observe an intriguing and
+                counterintuitive behavior instead.
               <ol>
                 <li>Across the IFT trajectory, we measure model's context reliance i.e. it's ability to answer based on
-                  the input context over it's parametric knowledge, when the two are counterfactual.</li>
-                <li>We observe an <i>intriguing</i> phenomenon: contrary to the expectation, context reliance infact
-                  decreases with instruction finetuning, despite an initial expected increase (figure above).
-                  This decrease happens, while the performance on standard benchmarks keeps on increasing.</li>
+                  the input context over it's parametric knowledge, when the two are at conflicts.</li>
+                <li>Contrary to the expectation, context reliance infact
+                  decreases with instruction finetuning, despite an initial expected increase.
+                  This decrease happens, while the performance on standard benchmarks keeps on increasing (figure
+                  above).</li>
                 <li>We call this as <b>context-parametric inversion</b> and observe this across multiple general-purpose
                   IFT datasets and model families.
                 </li>
@@ -177,7 +177,7 @@
               <ol>
                 <li>The increasing reliance on parametric knowledge (drop in context reliance) extends to facts beyond
                   those seen during finetuning. Removing any overlap between the finetuning and evaluation set does not
-                  mitigate the drop in context reliance (see the figure on the left)</li>
+                  mitigate the drop in context reliance (figure on the left).</li>
                 <li>Another hypotheses could be lack of enough context based answering datapoints in
                   instruction finetuning dataset. However, even when we finetune on a context-only subset of
                   IFT data (e.g., Alpaca), we observe a drop in context reliance (right figure, red-curve).</li>
@@ -206,7 +206,7 @@
                   <img src="./resources/data_cat.png" width="70%" style="border-radius:10px;"></img>
                 </div>
               </div>
-              <p>
+              <p style="margin-top: 20px;">
               <ol>
                 <li><b>Context-Critical Datapoints</b>: Context provides key information needed to answer the user
                   query.</li>
@@ -240,19 +240,23 @@
                 </div>
               </div>
               <p style="margin-top: 20px;">
-                Our theoretical analysis naturally leads us to some potential mitigation strategies beyond filtering
-                non-context critical datapoints. These strategies give some limited but insightful results.
+                Our theoretical analysis naturally leads us to some potential mitigation strategies beyond filtering out
+                non-context critical datapoints. These strategies give some limited but insightful gains.
               <ol>
                 <li>Counterfactual data augmentation, a widely used approach, improves context reliance <i>only</i> on
                   tasks similar in type to the augmented data. </li>
                 <li> For example, adding entity substituted QA counterfactual data improves performance on QA tasks
-                  only and doesn't generalize to other kind of context-parametric conflicts.</li>
+                  only (e.g., CF_BIO) and doesn't generalize to other kind of context-parametric conflicts (e.g.,
+                  CF_Quotes).</li>
                 <li><b>QK Finetuning: </b> Regularizing by updating only the "Query" and "Key"
                   matrices enhances context reliance on certain tasks but may hurt performance on standard benchmarks,
                   as value matrices can learn additional facts during finetuning.</li>
               </ol>
               </p>
 
+              <p> Overall, we hope that our work serves as a starting point in addressing this fundamental challenge
+                of improving context reliance in LLMs and the effect of instruction finetuning on the
+                same.</p>
 
 
         </div>

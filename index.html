@@ -178,7 +178,7 @@
                   those seen during finetuning. Removing any overlap between the finetuning and evaluation set does not
                   mitigate the drop in context reliance (see the figure on the left)</li>
                 <li>Another hypotheses could be lack of enough context based answering datapoints in
-                  instruction finetuning dataset. However, even when we finetune only on a context-based subset of
+                  instruction finetuning dataset. However, even when we finetune on a context-only subset of
                   IFT data (ex., Alpaca), we observe a drop in context reliance (right figure, red-curve).</li>
                 <li> This highlights that not all context-based datapoints effectively promote context reliance, and
                   model still seems to learn alternative preditive features.</li>
@@ -191,9 +191,11 @@
               <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">What causes context-parametric
                 inversion?</h2>
 
-              We saw above that finetuning only on a context-based subset of IFT data still leads to a drop in context.
-              This highlights that not all context-based datapoints promote context reliance. We take a closer look
-              below.
+              <p>We saw above that finetuning only on a context-based subset of IFT data still leads to a drop in
+                context.
+                This highlights that not all context-based datapoints promote context reliance. We take a closer look
+                below.</p>
+
               <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">A closer look at the
                 Instruction Finetuning Datasets
               </h3>
@@ -210,7 +212,6 @@
                 <li><b>Non-Context Critical Datapoints</b>: Context is approximately redundant with model’s parametric
                   knowledge.
                 </li>
-                <li><b>Parametric Datapoints</b>: General fact recall datapoints.</li>
               </ol>
 
               <!-- <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">What causes context-parametric

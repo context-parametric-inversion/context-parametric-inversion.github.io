@@ -116,8 +116,18 @@
 
           <tr>
             <td>
-              <!-- <hr color="gray" size="3"> -->
+
               <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">TLDR</h2>
+              <p>
+                We highlight an intriguing failure mode of instruction finetuning (IFT) in large language models, where
+                the model's tendency to answer based on the input context over it's parametric knowledge decreases with
+                IFT, after an initial expected increase. This happend while the performance on standard benchmarks keeps
+                on increasing. We call this as <b>context-parametric inversion</b>.
+              </p>
+              <hr color="gray" size="3">
+
+
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Context-Parametric Inversion</h2>
               <div class="row">
                 <div class="col" style="text-align: center">
                   <!-- add center align the image -->
@@ -125,23 +135,30 @@
                 </div>
               </div>
               <p>
+                LLM's are instruction finetuned to improve their ability to follow the user instructions and the input
+                context.
+                But why do even the instruction tuned chatbots still fail to follow the input context, especially when
+                it
+                conflicts their pretraining knowledge? In principle, instruction finetuning (IFT) should improve model's
+                context reliance, but we
+                observe a counterintuitive behavior instead.
               <ol>
-                <li>LLM's are instruction finetuned to improve their ability to follow the user instruction and input
-                  context.
-                </li>
-                <li>However, state-of-the-art models still struggle to rely on the context, especially when it is not
-                  aligned with parametric knowledge. Why does this happen even after instruction finetuning?</li>
-                <li>We observe an <i>intriguing</i> phenomenon: context reliance infact
-                  decreases with instruction finetuning, despite an initial expected increase. This decrease happens,
-                  while the performance on standard benchmarks keeps on increasing. Rather it starts quite early into
-                  the training.</li>
-                <li>This is quite surprising as instruction finetuning is infact supposed to improve context reliance.
-                  We call this as <b>context-parametric inversion</b>.
+                <li>Across the IFT trajectory, we measure model's context reliance using its accuracy on knowledge
+                  conflict datasets where the context is counterfactual to parametric knowledge.</li>
+                <li>We observe an <i>intriguing</i> phenomenon: contrary to the expectation, context reliance infact
+                  decreases with instruction finetuning, despite an initial expected increase (figure above).
+                  This decrease happens, while the performance on standard benchmarks keeps on increasing.</li>
+                <li>We call this as <b>context-parametric inversion</b> and observe this across multiple general-purpose
+                  IFT datasets and model families.
                 </li>
 
               </ol>
               </p>
               <hr color="gray" size="3">
+
+
+
+
               <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Is there a Simple Explanation
                 for this?</h2>
               <!-- center align the h3 -->

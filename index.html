@@ -140,11 +140,10 @@
                 But why do even the instruction tuned chatbots still fail to follow the input context, especially when
                 it
                 conflicts their pretraining knowledge? In principle, instruction finetuning (IFT) should improve model's
-                context reliance, but we
-                observe a counterintuitive behavior instead.
+                ability to follow the input context, but we observe a counterintuitive behavior instead.
               <ol>
-                <li>Across the IFT trajectory, we measure model's context reliance using its accuracy on knowledge
-                  conflict datasets where the context is counterfactual to parametric knowledge.</li>
+                <li>Across the IFT trajectory, we measure model's context reliance i.e. it's ability to answer based on
+                  the input context over it's parametric knowledge, when the two are counterfactual.</li>
                 <li>We observe an <i>intriguing</i> phenomenon: contrary to the expectation, context reliance infact
                   decreases with instruction finetuning, despite an initial expected increase (figure above).
                   This decrease happens, while the performance on standard benchmarks keeps on increasing.</li>
@@ -172,50 +171,56 @@
                 </div>
               </div>
               <p>
+                Through various controlled studies, we show that context-parametric inversion during IFT cannot be
+                simply explained by classical hypotheses like memorization, overfitting or forgetting.
               <ol>
-                <li>Can this drop in context reliance with finetuning be attributed to memorization of facts?
-                  We observe that even when removing any overlap between finetuning and eval data,
-                  we observe a drop in context reliance.</li>
-                </li>
-                <li>
-                  Model learns to rely on parametric
-                  knowledge broadly well outside the exact facts seen during finetuning.
-                </li>
+                <li>The increasing reliance on parametric knowledge (drop in context reliance) extends to facts beyond
+                  those seen during finetuning. Removing any overlap between the finetuning and evaluation set does not
+                  mitigate the drop in context reliance (see the figure on the left)</li>
                 <li>Another hypotheses could be lack of enough context based answering datapoints in
-                  instruction finetuning dataset.</li>
-                </li>
-                <li>However, even when finetuning on a <b>context-only subset of Alpaca</b> (~30%), there is a drop in
-                  context reliance (red-curve).</li>
+                  instruction finetuning dataset. However, even when we finetune only on a context-based subset of
+                  IFT data (ex., Alpaca), we observe a drop in context reliance (right figure, red-curve).</li>
+                <li> This highlights that not all context-based datapoints effectively promote context reliance, and
+                  model still seems to learn alternative preditive features.</li>
               </ol>
               </p>
 
               <hr color="gray" size="3">
 
               <br>
-              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">A closer look at the Instruction
-                Finetuning Datasets</h2>
+              <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">What causes context-parametric
+                inversion?</h2>
+
+              We saw above that finetuning only on a context-based subset of IFT data still leads to a drop in context.
+              This highlights that not all context-based datapoints promote context reliance. We take a closer look
+              below.
+              <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">A closer look at the
+                Instruction Finetuning Datasets
+              </h3>
               <div class="row">
                 <div class="col" style="text-align: center">
                   <!-- add center align the image -->
-                  <img src="./resources/data_categories.png" width="70%" style="border-radius:10px;"></img>
+                  <img src="./resources/data_cat.png" width="70%" style="border-radius:10px;"></img>
                 </div>
               </div>
               <p>
               <ol>
                 <li><b>Context-Critical Datapoints</b>: Context provides key information needed to answer the user
                   query.</li>
-                <li><b>Non-Context Critical Datapoints</b>: Context overlaps with model's knowledge from pretraining.
+                <li><b>Non-Context Critical Datapoints</b>: Context is approximately redundant with model’s parametric
+                  knowledge.
                 </li>
                 <li><b>Parametric Datapoints</b>: General fact recall datapoints.</li>
               </ol>
 
-              <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">What causes context-parametric
-                inversion?
-              </h3>
+              <!-- <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">What causes context-parametric
+                inversion? </h3> -->
               Both <b>empirically and theoretically</b>, we show that this drop in context reliance is due to the
               presence of non-context critical datapoints. <i>In the early stages of training</i>, context-critical
               points
-              have a high loss, and drive the attention towards the context. <i>In the later stages</i>, the model
+              have a high loss, and drive the attention towards the context. However, as training progresses, the
+              loss on context-critical points decreases, and the non-context-critical points dominate the gradient.
+              <i>In the later stages</i>, the model
               leverages its pretrained knowledge to further reduce the loss on the <i>non-context-critical points</i>,
               shifting the attention away from the context.
               </p>

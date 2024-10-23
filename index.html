@@ -119,10 +119,11 @@
 
               <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">TLDR</h2>
               <p>
-                We highlight an intriguing failure mode of instruction finetuning (IFT) in large language models, where
+                We highlight an intriguing failure mode of instruction finetuning (IFT) in LLMs, where contrary to the
+                expectation,
                 the model's tendency to answer based on the input context over it's parametric knowledge decreases with
-                IFT, after an initial expected increase. This happend while the performance on standard benchmarks keeps
-                on increasing. We call this as <b>context-parametric inversion</b>.
+                IFT, despite an initial expected increase. This happens while the performance on standard benchmarks
+                keeps on increasing. We call this as <b>context-parametric inversion</b>.
               </p>
               <hr color="gray" size="3">
 
@@ -134,7 +135,7 @@
                   <img src="./resources/cpi.png" width="50%" style="border-radius:10px;"></img>
                 </div>
               </div>
-              <p>
+              <p style="margin-top: 20px;">
                 LLM's are instruction finetuned to improve their ability to follow the user instructions and the input
                 context.
                 But why do even the instruction tuned chatbots still fail to follow the input context, especially when

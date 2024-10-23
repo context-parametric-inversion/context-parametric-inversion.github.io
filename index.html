@@ -119,9 +119,9 @@
 
               <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">TLDR</h2>
               <p>
-                We uncover a broad failure in Instruction Finetuning, where the model begins to rely more on the
-                parametric knowledge than the input context when they conflict, despite an initial jump in context
-                reliance. We call this as <b>context-parametric inversion</b>.
+                We uncover a broad failure in Instruction Finetuning of Large Language Models, where the model begins to
+                rely more on it's parametric knowledge than the input context when they conflict, despite an initial
+                jump in context reliance. We call this as <b>context-parametric inversion</b>.
               </p>
               <hr color="gray" size="3">
 
@@ -149,7 +149,7 @@
                   This decrease happens, while the performance on standard benchmarks keeps on increasing (figure
                   above).</li>
                 <li>We call this as <b>context-parametric inversion</b> and observe this across multiple general-purpose
-                  IFT datasets and model families.
+                  IFT datasets.
                 </li>
 
               </ol>
@@ -214,6 +214,7 @@
                   knowledge.
                 </li>
               </ol>
+              We refer the reader to Section 4.3 in the paper for further details.
 
               <!-- <h3 class="subtitle is-3" style="text-align: center; padding-bottom: 10px;">What causes context-parametric
                 inversion? </h3> -->
